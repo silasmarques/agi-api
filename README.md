@@ -7,6 +7,8 @@
 ![JUnit](https://img.shields.io/badge/JUnit-5.12.2-orange)
 ![Tests](https://img.shields.io/badge/testes-13%20passing-brightgreen)
 
+**[Ver Allure Report](https://silasmarques.github.io/agi-api/)**
+
 ---
 
 ## Sobre o projeto
@@ -27,12 +29,12 @@ Os testes nao criam, alteram ou excluem dados. Todos os endpoints cobertos sao d
 | Tecnologia | Versao | Finalidade |
 |---|---:|---|
 | Java | 21 | Linguagem principal |
-| Gradle Wrapper | 9.0.0 | Build e execucao dos testes |
+| Gradle Wrapper | 8.14.4 | Build e execucao dos testes |
 | Rest Assured | 5.5.2 | Chamadas HTTP e validacoes de API |
 | JUnit 5 | 5.12.2 | Runner, tags e testes parametrizados |
 | AssertJ | 3.26.3 | Assertions fluentes |
 | JSON Schema Validator | 5.5.2 | Validacao de contrato |
-| Allure Report | 2.29.1 | Relatorio visual de execucao |
+| Allure Report | 2.30.0 | Relatorio visual de execucao |
 | GitHub Actions | - | Pipeline de smoke/regressao |
 
 ---
@@ -348,7 +350,9 @@ O relatorio HTML nativo do Gradle tambem fica disponivel em:
 build/reports/tests/test/index.html
 ```
 
-> No GitHub Actions, os resultados Allure sao enviados como artifact. Publicacao online via GitHub Pages pode ser adicionada depois, caso seja desejado manter o mesmo modelo do `agi-e2e`.
+**Relatorio online atualizado pela pipeline:** [silasmarques.github.io/agi-api](https://silasmarques.github.io/agi-api/)
+
+No GitHub Actions, o Allure Report e gerado automaticamente e publicado no GitHub Pages apos execucoes na branch `main`. Os resultados brutos do Allure e os XMLs do JUnit tambem sao enviados como artifacts na aba **Actions**.
 
 ---
 
@@ -363,8 +367,9 @@ Arquivo: `.github/workflows/api-tests.yml`
 | `schedule` | Suite completa |
 | `workflow_dispatch` | Suite completa manual |
 
-Artifacts publicados:
+Publicacao e artifacts:
 
+- GitHub Pages: `https://silasmarques.github.io/agi-api/`
 - `build/allure-results`
 - `build/test-results`
 
