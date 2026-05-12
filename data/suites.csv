@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","3972","Deve listar imagens de uma raca existente","","Tue May 12 23:15:34 UTC 2026","passed","Tue May 12 23:15:37 UTC 2026","","br.com.silas.agiapi.tests.dogs.BreedImagesTest","br.com.silas.agiapi.tests.dogs.BreedImagesTest","deveListarImagensDeUmaRacaExistente"
+"","3921","Deve retornar uma imagem aleatoria com contrato valido","","Tue May 12 23:15:34 UTC 2026","passed","Tue May 12 23:15:37 UTC 2026","","br.com.silas.agiapi.tests.dogs.RandomImageTest","br.com.silas.agiapi.tests.dogs.RandomImageTest","deveRetornarUmaImagemAleatoriaComContratoValido"
+"","2921","Deve listar todas as racas com contrato valido","","Tue May 12 23:15:34 UTC 2026","passed","Tue May 12 23:15:36 UTC 2026","","br.com.silas.agiapi.tests.dogs.BreedListTest","br.com.silas.agiapi.tests.dogs.BreedListTest","deveListarTodasAsRacasComContratoValido"
