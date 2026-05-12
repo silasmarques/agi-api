@@ -1,0 +1,14 @@
+.gradle/
+build/
+allure-results/
+allure-report/
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+out/
+bin/
+.DS_Store
+Thumbs.db
+*.log

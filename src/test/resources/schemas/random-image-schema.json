@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dog API - Random image",
+  "type": "object",
+  "required": ["message", "status"],
+  "properties": {
+    "message": {
+      "type": "string",
+      "pattern": "^https://images\\.dog\\.ceo/breeds/.+\\.(jpg|jpeg|png|gif)$"
+    },
+    "status": { "type": "string", "const": "success" }
+  },
+  "additionalProperties": false
+}

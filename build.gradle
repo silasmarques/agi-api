@@ -1,0 +1,118 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.12.0'
+}
+
+group = 'br.com.silas'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    restAssuredVersion = '5.5.2'
+    junitVersion       = '5.12.2'
+    allureVersion      = '2.29.1'
+    assertjVersion     = '3.26.3'
+    slf4jVersion       = '2.0.16'
+    aspectjVersion     = '1.9.22.1'
+}
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+dependencies {
+    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly    'org.junit.platform:junit-platform-launcher'
+
+    testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    testImplementation "io.rest-assured:json-schema-validator:${restAssuredVersion}"
+
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+
+    testImplementation "io.qameta.allure:allure-junit5:${allureVersion}"
+    testImplementation "io.qameta.allure:allure-rest-assured:${allureVersion}"
+
+    testImplementation "org.slf4j:slf4j-simple:${slf4jVersion}"
+
+    agent "org.aspectj:aspectjweaver:${aspectjVersion}"
+}
+
+allure {
+    version = allureVersion
+    adapter {
+        aspectjWeaver = true
+        frameworks {
+            junit5 {
+                adapterVersion = allureVersion
+            }
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+
+    systemProperty 'env', System.getProperty('env', 'hml')
+    systemProperty 'junit.jupiter.execution.parallel.enabled',
+            System.getProperty('parallel', 'true')
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        showStandardStreams = false
+        exceptionFormat = 'full'
+    }
+
+    reports {
+        html.required = true
+        junitXml.required = true
+    }
+}
+
+tasks.register('smokeTest', Test) {
+    description = 'Executa apenas os testes de smoke'
+    group = 'verification'
+    useJUnitPlatform {
+        includeTags 'smoke'
+    }
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    systemProperty 'env', System.getProperty('env', 'hml')
+}
+
+tasks.register('regressionTest', Test) {
+    description = 'Executa os testes de regressao'
+    group = 'verification'
+    useJUnitPlatform {
+        includeTags 'regression'
+    }
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    systemProperty 'env', System.getProperty('env', 'hml')
+}
+
+tasks.register('contractTest', Test) {
+    description = 'Executa apenas os testes de contrato JSON Schema'
+    group = 'verification'
+    useJUnitPlatform {
+        includeTags 'contract'
+    }
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    systemProperty 'env', System.getProperty('env', 'hml')
+}
