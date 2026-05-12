@@ -1,0 +1,19 @@
+# Normaliza line endings no repo independente do core.autocrlf de cada dev
+* text=auto eol=lf
+
+# Scripts shell precisam de LF mesmo no Windows (executam no Linux/CI)
+gradlew text eol=lf
+*.sh text eol=lf
+
+# Scripts Windows precisam de CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binários — git não deve tentar normalizar
+*.jar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.zip binary

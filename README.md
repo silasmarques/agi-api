@@ -5,7 +5,7 @@
 ![Java](https://img.shields.io/badge/Java-21-blue?logo=openjdk)
 ![Rest Assured](https://img.shields.io/badge/Rest%20Assured-5.5.2-green)
 ![JUnit](https://img.shields.io/badge/JUnit-5.12.2-orange)
-![Tests](https://img.shields.io/badge/testes-13%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/testes-10%20passing-brightgreen)
 
 **[Ver Allure Report](https://silasmarques.github.io/agi-api/)**
 
@@ -17,7 +17,7 @@ A Dog API e uma API publica para consulta de racas e imagens de caes. Este proje
 
 - **Contrato da API:** validacao via JSON Schema.
 - **Comportamento esperado:** status code, campo `status`, estrutura de `message` e mensagens de erro.
-- **Qualidade da resposta:** content-type JSON, URL de imagens e tempo de resposta aceitavel.
+- **Qualidade da resposta:** content-type JSON, URL de imagens e consistencia dos dados retornados.
 - **Execucao multiplataforma:** Gradle Wrapper para rodar em Windows, Linux e macOS.
 
 Os testes nao criam, alteram ou excluem dados. Todos os endpoints cobertos sao de leitura.
@@ -133,7 +133,7 @@ https://dog.ceo/api
 
 ## Cenarios de teste
 
-**Total: 13 testes** | Suite organizada por `@Tag`: `smoke`, `regression`, `contract`, `negative`, `breeds`, `images`.
+**Total: 10 testes** | Suite organizada por `@Tag`: `smoke`, `regression`, `contract`, `negative`, `breeds`, `images`.
 
 ---
 
@@ -168,20 +168,9 @@ Entao message deve ser um mapa nao vazio
   E   cada valor deve ser uma lista de sub-racas, mesmo quando vazia
 ```
 
-#### CT-04 - Deve responder listagem de racas como JSON em tempo aceitavel
-
-```gherkin
-Dado  que a aplicacao depende da listagem de racas
-Quando consulta GET /breeds/list/all
-Entao o content-type deve ser JSON
-  E   a resposta deve ocorrer em ate 5000 ms
-```
-
----
-
 ### Modulo 2 - Imagens por raca
 
-#### CT-05 - Deve listar imagens de uma raca existente
+#### CT-04 - Deve listar imagens de uma raca existente
 
 ```gherkin
 Dado  que a raca hound existe na Dog API
@@ -192,7 +181,7 @@ Entao a resposta deve retornar status HTTP 200
   E   as URLs devem pertencer ao dominio images.dog.ceo
 ```
 
-#### CT-06 a CT-09 - Racas conhecidas devem retornar imagens validas
+#### CT-05 a CT-08 - Racas conhecidas devem retornar imagens validas
 
 ```gherkin
 Dado  que a raca informada existe na Dog API
@@ -205,20 +194,12 @@ Entao a resposta deve retornar content-type JSON
 
 | CT | Raca |
 |---|---|
-| CT-06 | `akita` |
-| CT-07 | `hound` |
-| CT-08 | `pug` |
-| CT-09 | `retriever` |
+| CT-05 | `akita` |
+| CT-06 | `hound` |
+| CT-07 | `pug` |
+| CT-08 | `retriever` |
 
-#### CT-10 - Deve responder imagens por raca em tempo aceitavel
-
-```gherkin
-Dado  que a aplicacao exibe imagens de uma raca
-Quando consulta GET /breed/hound/images
-Entao a resposta deve ocorrer em ate 5000 ms
-```
-
-#### CT-11 - Deve retornar erro ao consultar raca inexistente
+#### CT-09 - Deve retornar erro ao consultar raca inexistente
 
 ```gherkin
 Dado  que a raca "raca-inexistente" nao existe
@@ -234,7 +215,7 @@ Entao a resposta deve retornar status HTTP 404
 
 ### Modulo 3 - Imagem aleatoria
 
-#### CT-12 - Deve retornar uma imagem aleatoria com contrato valido
+#### CT-10 - Deve retornar uma imagem aleatoria com contrato valido
 
 ```gherkin
 Dado  que a aplicacao precisa exibir uma imagem aleatoria
@@ -244,18 +225,6 @@ Entao a resposta deve retornar status HTTP 200
   E   status deve ser "success"
   E   message deve ser uma URL valida de imagem
 ```
-
-#### CT-13 - Deve retornar imagem aleatoria como JSON em tempo aceitavel
-
-```gherkin
-Dado  que a imagem aleatoria e usada na experiencia do usuario
-Quando consulta GET /breeds/image/random
-Entao o content-type deve ser JSON
-  E   a resposta deve ocorrer em ate 5000 ms
-  E   message deve apontar para uma imagem em images.dog.ceo
-```
-
----
 
 ## Arquitetura
 
@@ -362,7 +331,7 @@ Arquivo: `.github/workflows/api-tests.yml`
 
 | Trigger | Execucao |
 |---|---|
-| `push` para `main` | Smoke tests |
+| `push` para `main` | Suite completa e publicacao do Allure Report |
 | `pull_request` para `main` | Smoke tests |
 | `schedule` | Suite completa |
 | `workflow_dispatch` | Suite completa manual |
@@ -381,6 +350,6 @@ Publicacao e artifacts:
 ## Observacoes tecnicas
 
 - A suite roda em paralelo por padrao via JUnit Platform.
-- Os testes de performance usam limite conservador de `5000 ms`, suficiente para detectar lentidao grosseira sem deixar a suite fragil.
 - O teste de imagem aleatoria valida formato e origem da URL, mas nao baixa a imagem; isso evita misturar teste da API com disponibilidade de CDN/storage.
 - O endpoint de raca inexistente cobre comportamento negativo sem depender de massa de dados externa.
+- Testes de performance/carga ficam fora deste projeto por escopo; a ideia e manter o `agi-api` focado em contrato e comportamento HTTP.

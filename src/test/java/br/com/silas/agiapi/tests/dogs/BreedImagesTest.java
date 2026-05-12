@@ -38,6 +38,7 @@ class BreedImagesTest {
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("schemas/breed-images-schema.json"));
 
+        DogApiAssertions.shouldReturnJson(response);
         DogApiAssertions.shouldContainBreedImages(response, KNOWN_BREED);
     }
 
@@ -51,17 +52,6 @@ class BreedImagesTest {
 
         DogApiAssertions.shouldReturnJson(response);
         DogApiAssertions.shouldContainBreedImages(response, breed);
-    }
-
-    @Test
-    @Tag("regression")
-    @Tag("images")
-    @Severity(SeverityLevel.MINOR)
-    @DisplayName("Deve responder imagens por raca em tempo aceitavel")
-    void deveResponderImagensPorRacaEmTempoAceitavel() {
-        Response response = dogApiClient.listBreedImages(KNOWN_BREED);
-
-        DogApiAssertions.shouldRespondWithin(response, 5000);
     }
 
     @Test

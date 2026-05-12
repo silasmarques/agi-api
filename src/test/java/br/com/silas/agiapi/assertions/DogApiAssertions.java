@@ -5,7 +5,6 @@ import io.restassured.response.Response;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,13 +26,6 @@ public final class DogApiAssertions {
         assertThat(response.contentType())
                 .as("content-type")
                 .contains("application/json");
-    }
-
-    @Step("Validar tempo de resposta ate {maxMilliseconds} ms")
-    public static void shouldRespondWithin(Response response, long maxMilliseconds) {
-        assertThat(response.timeIn(TimeUnit.MILLISECONDS))
-                .as("tempo de resposta em ms")
-                .isLessThanOrEqualTo(maxMilliseconds);
     }
 
     @Step("Validar lista de racas retornada")

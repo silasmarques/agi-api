@@ -39,7 +39,7 @@ jobs:
       - name: Run API tests
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" == "pull_request" || "${{ github.event_name }}" == "push" ]]; then
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             ./gradlew smokeTest --no-daemon -Denv=hml
           else
             ./gradlew test --no-daemon -Denv=${{ inputs.env || 'hml' }}

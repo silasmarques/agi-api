@@ -28,10 +28,13 @@ class BreedListTest {
     @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Deve listar todas as racas com contrato valido")
     void deveListarTodasAsRacasComContratoValido() {
-        dogApiClient.listAllBreeds()
-                .then()
+        var response = dogApiClient.listAllBreeds();
+
+        response.then()
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("schemas/breed-list-schema.json"));
+
+        DogApiAssertions.shouldReturnJson(response);
     }
 
     @Test
@@ -50,17 +53,5 @@ class BreedListTest {
     @DisplayName("Deve retornar racas em formato de mapa com listas de sub-racas")
     void deveRetornarRacasEmFormatoDeMapaComListasDeSubRacas() {
         DogApiAssertions.shouldContainOnlyBreedEntriesWithSubBreedLists(dogApiClient.listAllBreeds());
-    }
-
-    @Test
-    @Tag("regression")
-    @Tag("breeds")
-    @Severity(SeverityLevel.MINOR)
-    @DisplayName("Deve responder listagem de racas como JSON em tempo aceitavel")
-    void deveResponderListagemDeRacasComoJsonEmTempoAceitavel() {
-        var response = dogApiClient.listAllBreeds();
-
-        DogApiAssertions.shouldReturnJson(response);
-        DogApiAssertions.shouldRespondWithin(response, 5000);
     }
 }

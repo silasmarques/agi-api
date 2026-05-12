@@ -35,19 +35,7 @@ class RandomImageTest {
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("schemas/random-image-schema.json"));
 
-        DogApiAssertions.shouldContainRandomImage(response);
-    }
-
-    @Test
-    @Tag("regression")
-    @Tag("images")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Deve retornar imagem aleatoria como JSON em tempo aceitavel")
-    void deveRetornarImagemAleatoriaComoJsonEmTempoAceitavel() {
-        Response response = dogApiClient.randomImage();
-
         DogApiAssertions.shouldReturnJson(response);
-        DogApiAssertions.shouldRespondWithin(response, 5000);
         DogApiAssertions.shouldContainRandomImage(response);
     }
 }
