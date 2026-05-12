@@ -352,7 +352,7 @@ build/reports/tests/test/index.html
 
 **Relatorio online atualizado pela pipeline:** [silasmarques.github.io/agi-api](https://silasmarques.github.io/agi-api/)
 
-No GitHub Actions, o Allure Report e gerado automaticamente e publicado no GitHub Pages apos execucoes na branch `main`. Os resultados brutos do Allure e os XMLs do JUnit tambem sao enviados como artifacts na aba **Actions**.
+No GitHub Actions, o Allure Report e gerado automaticamente e publicado no GitHub Pages pela branch `gh-pages`, seguindo o mesmo padrao do projeto `agi-e2e`. Os resultados brutos do Allure e os XMLs do JUnit tambem sao enviados como artifacts na aba **Actions**.
 
 ---
 
@@ -370,8 +370,11 @@ Arquivo: `.github/workflows/api-tests.yml`
 Publicacao e artifacts:
 
 - GitHub Pages: `https://silasmarques.github.io/agi-api/`
+- Branch de publicacao: `gh-pages`
 - `build/allure-results`
 - `build/test-results`
+
+> Se o link do Pages retornar 404 na primeira execucao, habilite em **Settings > Pages** a publicacao a partir da branch `gh-pages`, pasta `/root`.
 
 ---
 
