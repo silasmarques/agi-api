@@ -35,7 +35,7 @@ Os testes nao criam, alteram ou excluem dados. Todos os endpoints cobertos sao d
 | AssertJ | 3.26.3 | Assertions fluentes |
 | JSON Schema Validator | 5.5.2 | Validacao de contrato |
 | Allure Report | 2.30.0 | Relatorio visual de execucao |
-| GitHub Actions | - | Pipeline de smoke/regressao |
+| GitHub Actions | - | Pipeline de testes e publicacao do Allure Report |
 
 ---
 
@@ -146,6 +146,7 @@ Dado  que a Dog API esta disponivel
 Quando uma requisicao GET e feita para /breeds/list/all
 Entao a resposta deve retornar status HTTP 200
   E   o corpo deve respeitar o JSON Schema de listagem de racas
+  E   o content-type deve ser JSON
   E   o campo status deve ser "success"
 ```
 
@@ -177,6 +178,7 @@ Dado  que a raca hound existe na Dog API
 Quando uma requisicao GET e feita para /breed/hound/images
 Entao a resposta deve retornar status HTTP 200
   E   o corpo deve respeitar o JSON Schema de imagens por raca
+  E   o content-type deve ser JSON
   E   message deve conter uma lista nao vazia de URLs de imagem
   E   as URLs devem pertencer ao dominio images.dog.ceo
 ```
@@ -222,6 +224,7 @@ Dado  que a aplicacao precisa exibir uma imagem aleatoria
 Quando consulta GET /breeds/image/random
 Entao a resposta deve retornar status HTTP 200
   E   o corpo deve respeitar o JSON Schema de imagem aleatoria
+  E   o content-type deve ser JSON
   E   status deve ser "success"
   E   message deve ser uma URL valida de imagem
 ```
@@ -310,7 +313,7 @@ Arquivos gerados:
 
 ```text
 build/allure-results
-build/reports/allure-report
+build/reports/allure-report/allureReport
 ```
 
 O relatorio HTML nativo do Gradle tambem fica disponivel em:
