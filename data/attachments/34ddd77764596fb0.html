@@ -1,12 +1,13 @@
-<div>Status code 200 </div>
+<div>Status code 404 </div>
 
 
 <h4>Body</h4>
 <div>
     <pre class="preformated-text">
 {
-    &quot;message&quot;: &quot;https://images.dog.ceo/breeds/frise-bichon/3.jpg&quot;,
-    &quot;status&quot;: &quot;success&quot;
+    &quot;status&quot;: &quot;error&quot;,
+    &quot;message&quot;: &quot;Breed not found (main breed does not exist)&quot;,
+    &quot;code&quot;: 404
 }    </pre>
 </div>
 
@@ -14,18 +15,18 @@
 <div>
         <div>Transfer-Encoding: chunked</div>
         <div>Server: cloudflare</div>
-        <div>CF-RAY: a59e5dad8883f37f-SEA</div>
+        <div>CF-RAY: a5a6429f8a088583-IAD</div>
         <div>Access-Control-Allow-Origin: *</div>
         <div>Access-Control-Allow-Methods: GET, OPTIONS, HEAD</div>
         <div>Connection: keep-alive</div>
         <div>cf-cache-status: DYNAMIC</div>
-        <div>Date: Fri, 13 Nov 2026 14:11:29 GMT</div>
+        <div>Date: Sat, 14 Nov 2026 13:11:07 GMT</div>
         <div>Speculation-Rules: &quot;/cdn-cgi/speculation&quot;</div>
         <div>Access-Control-Expose-Headers: *</div>
         <div>Nel: {&quot;report_to&quot;:&quot;cf-nel&quot;,&quot;success_fraction&quot;:0.0,&quot;max_age&quot;:604800}</div>
-        <div>Report-To: {&quot;group&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://a.nel.cloudflare.com/report/v4?s=%2FbcKxd%2FXZxh57SE6V5HHR2l4IXQpLFahJ29br5TXcezn2BamsvCMNlsV1XHNLSgP%2Fzs9n1K7%2BNriOI%2F4ebWd5KZzTgnPa5pVwGywnw3OB5E%2Fp3Ew9rJ%2B8nOQ&quot;}]}</div>
+        <div>Report-To: {&quot;group&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://a.nel.cloudflare.com/report/v4?s=sCkO1CGkeiKFtMBeFJfK9eMr5uHjUOagRKmZ%2FvW2M%2B4SqX7t%2BrgQWvYZ%2FaQ4llyeFmHmm2pd0VQy7eyLRNSPzG8tEI35uOcfEtTmBQdI3%2FblTrtW0jXlX26O&quot;}]}</div>
         <div>Content-Encoding: gzip</div>
-        <div>cache-control: no-store</div>
+        <div>cache-control: public, max-age=300, s-maxage=600, stale-while-revalidate=30</div>
         <div>alt-svc: h3=&quot;:443&quot;; ma=86400</div>
         <div>Content-Type: application/json</div>
 </div>
